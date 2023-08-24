@@ -15,7 +15,8 @@
 // limitations under the License.
 
 import { start, stop } from './app';
-import { Logger } from './lib/logger';
+// import { Logger } from './lib/logger';
+import { Logger } from './lib/winston'
 
 const log = new Logger("index.ts")
 

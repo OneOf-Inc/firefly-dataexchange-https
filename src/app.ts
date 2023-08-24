@@ -25,14 +25,17 @@ import * as eventsHandler from './handlers/events';
 import { genTLSContext, init as initCert, loadPeerCAs } from './lib/cert';
 import { config, init as initConfig } from './lib/config';
 import { IAckEvent } from './lib/interfaces';
-import { Logger } from './lib/logger';
+// import { Logger } from './lib/logger';
+import { Logger } from './lib/winston'
 import RequestError, { errorHandler } from './lib/request-error';
 import * as utils from './lib/utils';
 import { router as apiRouter, setRefreshCACerts } from './routers/api';
 import { router as p2pRouter } from './routers/p2p';
 import { init as initEvents } from './handlers/events';
+import morgan from 'morgan';
 
-const log = new Logger("app.ts");
+
+const log = new Logger('app');
 
 const swaggerDocument = YAML.load(path.join(__dirname, './swagger.yaml'));
 
@@ -126,11 +129,24 @@ export const start = async () => {
     }
   });
 
+  log.info(path.join(__dirname, 'access.log'));
+  apiApp.use(morgan('--> :method :url', { 
+    stream: { write: (message) => log.info(message) }
+  }));
+  apiApp.use(morgan('<-- :method :url [:status] :res[content-length] - :response-time ms', { 
+    stream: { write: (message) => log.info(message) }
+  }));
   apiApp.use(express.urlencoded({ extended: true }));
   apiApp.use(express.json({limit: config.jsonParserLimit ?? utils.constants.DEFAULT_JSON_PARSER_LIMIT}));
   apiApp.use('/api/v1', apiRouter);
   apiApp.use(errorHandler);
 
+  p2pApp.use(morgan('[:date[iso]] --> :method :url', { 
+    stream: { write: (message) => log.info(message) }
+  }));
+  p2pApp.use(morgan('[:date[iso]] <-- :method :url [:status] :res[content-length] - :response-time ms', { 
+    stream: { write: (message) => log.info(message) }
+  }));
   p2pApp.use('/api/v1', p2pRouter);
   p2pApp.use(errorHandler);
 
@@ -162,4 +178,3 @@ export const stop = async () => {
   log.info("FireFly Data Exchange has stopped all webservers, exiting");
   process.exit();
 };
-

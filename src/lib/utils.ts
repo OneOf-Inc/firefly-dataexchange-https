@@ -20,7 +20,8 @@ import { Request } from 'express';
 import { promises as fs } from 'fs';
 import { X509 } from 'jsrsasign';
 import { ICertData, IFile } from './interfaces';
-import { Logger } from './logger';
+// import { Logger } from './logger';
+import { Logger } from './winston'
 import RequestError from './request-error';
 import { TLSSocket } from "tls";
 

@@ -19,7 +19,8 @@ import https from 'https';
 import { v4 as uuidV4 } from 'uuid';
 import { ca, cert, key, peerID } from '../lib/cert';
 import { IMessageDeliveredEvent, IMessageFailedEvent, MessageTask } from '../lib/interfaces';
-import { Logger } from '../lib/logger';
+// import { Logger } from '../lib/logger';
+import { Logger } from '../lib/winston'
 import * as utils from '../lib/utils';
 import { queueEvent } from './events';
 

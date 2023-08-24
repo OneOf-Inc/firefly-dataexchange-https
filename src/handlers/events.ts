@@ -16,7 +16,8 @@
 
 import EventEmitter from "events";
 import { IAckEvent, IConfig, OutboundEvent } from "../lib/interfaces";
-import { Logger } from "../lib/logger";
+// import { Logger } from "../lib/logger";
+import { Logger } from '../lib/winston'
 import * as utils from '../lib/utils';
 
 const log = new Logger("handlers/events.ts")

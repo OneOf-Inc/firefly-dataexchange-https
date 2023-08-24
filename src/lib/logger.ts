@@ -65,9 +65,11 @@ export class Logger {
         logArgs.push(arg);
       }
     }
-    console.log(`${new Date().toISOString()} [${level}]:`, ...logArgs, this.loggerName);
+    console.log(`[${new Date().toISOString()}] [${level}]:`, ...logArgs, this.loggerName);
   }
   
 }
+
+
 
 setLogLevel();

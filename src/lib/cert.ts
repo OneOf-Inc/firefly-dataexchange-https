@@ -17,7 +17,8 @@
 import * as utils from '../lib/utils';
 import { promises as fs } from 'fs';
 import path from 'path';
-import { Logger } from './logger';
+// import { Logger } from './logger';
+import { Logger } from './winston'
 
 const log = new Logger('lib/certs.ts')
 

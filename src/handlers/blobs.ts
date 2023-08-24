@@ -23,7 +23,8 @@ import stream from 'stream';
 import { v4 as uuidV4 } from 'uuid';
 import { ca, cert, key, peerID } from '../lib/cert';
 import { BlobTask, IBlobDeliveredEvent, IBlobFailedEvent, IFile, IMetadata } from "../lib/interfaces";
-import { Logger } from '../lib/logger';
+// import { Logger } from '../lib/logger';
+import { Logger } from '../lib/winston'
 import RequestError from '../lib/request-error';
 import * as utils from '../lib/utils';
 import { queueEvent } from './events';

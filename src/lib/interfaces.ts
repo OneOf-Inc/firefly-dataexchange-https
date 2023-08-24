@@ -36,6 +36,11 @@ export interface IConfig {
     destinations?: string[]
   }[]
   jsonParserLimit?: string
+  logger?: {
+    dir: string
+    maxFiles?: number
+    maxSize?: number
+  }
 }
 
 export interface IFile {
