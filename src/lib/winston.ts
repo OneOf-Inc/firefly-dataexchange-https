@@ -45,7 +45,7 @@ export class Logger {
   getTransports() {
     return [
       new winston.transports.File({
-        filename: path.join(__dirname, 'access.log'),
+        filename: this.getLogDir(),
         level: this.getLogLevel(),
       }),
       new winston.transports.Console({
@@ -64,6 +64,10 @@ export class Logger {
       }
     }
     return logLevel;
+  }
+
+  getLogDir() {
+    return process.env.LOG_DIR || path.join(__dirname, 'logs');
   }
 
   error(...args: any[]) { this.logger.error(args); }
